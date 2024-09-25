@@ -1,12 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
 	<link rel="stylesheet" href="css/styles.css"/>
 
-	<title>WEB lab 1, Labor</title>
+<!--	<title>WEB lab 1, Labor</title>-->
+	<title>я тима</title>
 </head>
 <body>
-	<h1>Лабор Тимофей Владимирович, P3125, вариант 408966</h1>
+	<header>
+		<div class="fio">
+			Лабор Тимофей Владимирович
+		</div>
+		<div class="group-variant">
+			P3125<br>Вариант 408966
+		</div>
+	</header>
+
+	<table class="main">
+		<thead>
+		</thead>
+
+		<tbody>
+		<tr>
+			<td>
+				<div class="graph">
+					<canvas id="canvas" width="400" height="400"></canvas>
+				</div>
+			</td>
+			<td>
+				<form>
+				<div class="inputs">
+					<div class="x-container">
+						<input class="" type="text" name="x" id="x" autocomplete="off" required/>
+						<label class="text" for="x">
+							Введите X (-4; 4)
+						</label>
+					</div>
+					<div class="y-container">
+						<input class="" type="text" name="y" id="y" autocomplete="off" required/>
+						<label class="text" for="y">
+							Введите Y (-4; 4)
+						</label>
+					</div>
+					<div class="r-container">
+						<input class="" type="text" name="r" id="r" autocomplete="off" required/>
+						<label class="text" for="r">
+							Введите R (1; 4)
+						</label>
+					</div>
+				</div>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="records center-wrapper">
+				<table class="records-table">
+					<caption class="caption">Результаты</caption>
+					<thead>
+					<tr>
+						<th>X</th>
+						<th>Y</th>
+						<th>Попадание</th>
+						<th>Время выполнения</th>
+					</tr>
+					</thead>
+
+					<tbody id="records-body"></tbody>
+				</table>
+			</td>
+		</tr>
+		</tbody>
+	</table>
+	<script src="graph.js"></script>
 </body>
 </html>

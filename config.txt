@@ -1,0 +1,2 @@
+port httpd: 5007
+port fcgi: 5008

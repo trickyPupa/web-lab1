@@ -1,4 +1,34 @@
-h1 {
+header {
 	color: green;
-	font: 20px monospace;
+	font: 2.5em monospace;
+}
+
+.main{
+	margin:	auto;
+	display: table;
+	font-family: monospace;
+	border-spacing: 20px 10px;
+}
+
+.records {
+	text-align: center;
+	font-size: 1.5em;
+}
+
+.records-table {
+	border: 2px black solid;
+	border-collapse: collapse;
+}
+
+.center-wrapper table {
+	display: inline table;
+}
+
+.caption {
+	font-weight: bold;
+	font-size: 1.7em;
+}
+
+.inputs{
+	line-height: 10px;
 }
