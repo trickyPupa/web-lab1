@@ -3,7 +3,8 @@ const context = canvas.getContext('2d');
 
 canvas.width = 400;
 canvas.height = 400;
-var R = 160;
+const R = 160;
+const fillColor = "lightpink";
 
 
 function drawAxis() {
@@ -43,7 +44,7 @@ function drawGrid() {
 function drawCircle(x, y, r) {
     context.beginPath();
     context.moveTo(x, y);
-    context.fillStyle = '#48CFCB';
+    context.fillStyle = fillColor;
     context.arc(x, y, r, 0, Math.PI/2, false);
     context.closePath();
     context.fill();
@@ -52,7 +53,7 @@ function drawCircle(x, y, r) {
 function drawRect(x, y, w, h) {
     context.beginPath();
     context.moveTo(x, y);
-    context.fillStyle = '#48CFCB';
+    context.fillStyle = fillColor;
     context.rect(x, y, w, h);
     context.closePath();
     context.fill();
@@ -61,7 +62,7 @@ function drawRect(x, y, w, h) {
 function drawTriangle(x1, y1, x2, y2, x3, y3) {
     context.beginPath();
     context.moveTo(x1, y1);
-    context.fillStyle = '#48CFCB';
+    context.fillStyle = fillColor;
     context.lineTo(x2, y2);
     context.lineTo(x3, y3);
     context.closePath();

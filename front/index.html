@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta http-equiv="Content-Type" content="text/html"; charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html" charset="utf-8">
 	<link rel="stylesheet" href="css/styles.css"/>
 
 <!--	<title>WEB lab 1, Labor</title>-->
@@ -29,27 +29,53 @@
 				</div>
 			</td>
 			<td>
-				<form>
-				<div class="inputs">
-					<div class="x-container">
-						<input class="" type="text" name="x" id="x" autocomplete="off" required/>
-						<label class="text" for="x">
-							Введите X (-4; 4)
-						</label>
+				<form onsubmit="submitForm()">
+					<div class="inputs">
+						<div class="x-container">
+							<label class="text" for="x">
+								Введите X (-3; 5):
+							</label>
+							<input type="text" name="x" id="x" autocomplete="off" required/>
+						</div>
+						<br>
+						<div class="y-container">
+							<p class="y-text">Выберите Y:</p>
+							<br>
+							<input type="button" value="-3">
+							<input type="button" value="-2">
+							<input type="button" value="-1">
+							<input type="button" value="0">
+							<input type="button" value="1">
+							<input type="button" value="2">
+							<input type="button" value="3">
+							<input type="button" value="4">
+							<input type="button" value="5">
+						</div>
+						<div class="r-container">
+							<p class="r-text">Выберите R:</p>
+							<label>
+								<input type="checkbox" class="r-checkbox" value="1"/>
+								1
+							</label>
+							<label>
+								<input type="checkbox" class="r-checkbox" value="2"/>
+								2
+							</label>
+							<label>
+								<input type="checkbox" class="r-checkbox" value="3"/>
+								3
+							</label>
+							<label>
+								<input type="checkbox" class="r-checkbox" value="4"/>
+								4
+							</label>
+							<label>
+								<input type="checkbox" class="r-checkbox" value="5"/>
+								5
+							</label>
+						</div>
 					</div>
-					<div class="y-container">
-						<input class="" type="text" name="y" id="y" autocomplete="off" required/>
-						<label class="text" for="y">
-							Введите Y (-4; 4)
-						</label>
-					</div>
-					<div class="r-container">
-						<input class="" type="text" name="r" id="r" autocomplete="off" required/>
-						<label class="text" for="r">
-							Введите R (1; 4)
-						</label>
-					</div>
-				</div>
+					<button type="submit" class="send-data-button">Отправить</button>
 				</form>
 			</td>
 		</tr>

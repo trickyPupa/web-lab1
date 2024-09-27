@@ -1,3 +1,18 @@
+:root {
+	--background-white: #F5F5F5;
+	--light-grey: #E0E0E0;
+	--grey: #9e9e9e;
+	--black-text: #424242;
+	--blue: #48CFCB;
+	--dark-blue: #229799;
+	--red: #E53935;
+
+	--button-background: lightpink;
+	--button-shadow: #C71585;
+
+	--checked: lightpink;
+}
+
 header {
 	color: green;
 	font: 2.5em monospace;
@@ -31,4 +46,38 @@ header {
 
 .inputs{
 	line-height: 10px;
+	font-size: 1.4em;
+}
+
+button, input[type=button] {
+	border: none;
+	border-radius: 10px;
+	text-decoration: none;
+	color: black;
+	background: var(--button-background);
+	box-shadow: 0 5px 0 var(--button-shadow);
+	padding: 0.7em 1.7em;
+}
+
+button:hover, input[type=button]:hover {
+	background: var(--button-background);
+	box-shadow: none;
+	position: relative;
+	top: 5px;
+}
+
+.send-data-button {
+	padding: 1em 2em;
+}
+
+.r-checkbox {
+	accent-color: var(--checked);
+	width: 1.5em;
+	height: 1.5em;
+	appearance: none;
+	border: 2px solid #C71585;
+}
+
+.r-checkbox:checked {
+	background: #C71585;
 }
