@@ -12,8 +12,11 @@
 		<div class="fio">
 			Лабор Тимофей Владимирович
 		</div>
-		<div class="group-variant">
-			P3125<br>Вариант 408966
+		<div class="group">
+			P3125
+		</div>
+		<div class="variant">
+			Вариант 408966
 		</div>
 	</header>
 
@@ -29,7 +32,7 @@
 				</div>
 			</td>
 			<td>
-				<form onsubmit="submitForm()">
+				<form onsubmit="submitForm(event)" autocomplete="off" class="inputs-td">
 					<div class="inputs">
 						<div class="x-container">
 							<label class="text" for="x">
@@ -37,42 +40,44 @@
 							</label>
 							<input type="text" name="x" id="x" autocomplete="off" required/>
 						</div>
-						<br>
 						<div class="y-container">
-							<p class="y-text">Выберите Y:</p>
-							<br>
-							<input type="button" value="-3">
-							<input type="button" value="-2">
-							<input type="button" value="-1">
-							<input type="button" value="0">
-							<input type="button" value="1">
-							<input type="button" value="2">
-							<input type="button" value="3">
-							<input type="button" value="4">
-							<input type="button" value="5">
+							<label class="text" id="y-label" for="y-buttons-group">Выберите Y:</label>
+							<div id="y-buttons-group">
+								<input class="btn" onclick="toggleActive(this, '.btn')" type="button" value="-3">
+								<input class="btn" onclick="toggleActive(this, '.btn')" type="button" value="-2">
+								<input class="btn" onclick="toggleActive(this, '.btn')" type="button" value="-1">
+								<input class="btn" onclick="toggleActive(this, '.btn')" type="button" value="0">
+								<input class="btn" onclick="toggleActive(this, '.btn')" type="button" value="1">
+								<input class="btn" onclick="toggleActive(this, '.btn')" type="button" value="2">
+								<input class="btn" onclick="toggleActive(this, '.btn')" type="button" value="3">
+								<input class="btn" onclick="toggleActive(this, '.btn')" type="button" value="4">
+								<input class="btn" onclick="toggleActive(this, '.btn')" type="button" value="5">
+							</div>
 						</div>
 						<div class="r-container">
-							<p class="r-text">Выберите R:</p>
-							<label>
-								<input type="checkbox" class="r-checkbox" value="1"/>
-								1
-							</label>
-							<label>
-								<input type="checkbox" class="r-checkbox" value="2"/>
-								2
-							</label>
-							<label>
-								<input type="checkbox" class="r-checkbox" value="3"/>
-								3
-							</label>
-							<label>
-								<input type="checkbox" class="r-checkbox" value="4"/>
-								4
-							</label>
-							<label>
-								<input type="checkbox" class="r-checkbox" value="5"/>
-								5
-							</label>
+							<label class="text" for="r-checkboxes-group">Выберите R:</label>
+							<div class="r-checkboxes-group" id="r-checkboxes-group">
+								<label>
+									<input type="checkbox" class="r-checkbox" onclick="checkOnly(this, '.r-checkbox')" value="1"/>
+									1
+								</label>
+								<label>
+									<input type="checkbox" class="r-checkbox" onclick="checkOnly(this, '.r-checkbox')" value="2"/>
+									2
+								</label>
+								<label>
+									<input type="checkbox" class="r-checkbox" onclick="checkOnly(this, '.r-checkbox')" value="3"/>
+									3
+								</label>
+								<label>
+									<input type="checkbox" class="r-checkbox" onclick="checkOnly(this, '.r-checkbox')" value="4"/>
+									4
+								</label>
+								<label>
+									<input type="checkbox" class="r-checkbox" onclick="checkOnly(this, '.r-checkbox')" value="5"/>
+									5
+								</label>
+							</div>
 						</div>
 					</div>
 					<button type="submit" class="send-data-button">Отправить</button>
@@ -87,11 +92,12 @@
 					<tr>
 						<th>X</th>
 						<th>Y</th>
+						<th>R</th>
 						<th>Попадание</th>
 						<th>Время выполнения</th>
+						<th>Дата выполнения</th>
 					</tr>
 					</thead>
-
 					<tbody id="records-body"></tbody>
 				</table>
 			</td>
@@ -99,5 +105,6 @@
 		</tbody>
 	</table>
 	<script src="graph.js"></script>
+	<script src="scripts.js"></script>
 </body>
 </html>

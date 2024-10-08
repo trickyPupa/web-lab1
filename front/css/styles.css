@@ -7,15 +7,21 @@
 	--dark-blue: #229799;
 	--red: #E53935;
 
-	--button-background: lightpink;
-	--button-shadow: #C71585;
+	--main-pink: lightpink;
+	--dark-pink: #C71585;
+	--ultra-dark-pink: #810754;
+	--deep-pink: #FF1493;
 
-	--checked: lightpink;
+	--checked: var(--main-pink);
 }
 
 header {
-	color: green;
+	color: var(--dark-pink);
 	font: 2.5em monospace;
+}
+
+body {
+	background: #FFDCE2;
 }
 
 .main{
@@ -25,28 +31,24 @@ header {
 	border-spacing: 20px 10px;
 }
 
-.records {
-	text-align: center;
-	font-size: 1.5em;
-}
-
-.records-table {
-	border: 2px black solid;
-	border-collapse: collapse;
-}
-
-.center-wrapper table {
-	display: inline table;
-}
-
-.caption {
-	font-weight: bold;
-	font-size: 1.7em;
+.inputs-td {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .inputs{
 	line-height: 10px;
 	font-size: 1.4em;
+	align-self: flex-start;
+}
+
+input[type=text] {
+	border-color: var(--dark-pink);
+}
+
+#x, #r-checkboxes-group, #y-buttons-group {
+	margin-top: 1em;
 }
 
 button, input[type=button] {
@@ -54,13 +56,13 @@ button, input[type=button] {
 	border-radius: 10px;
 	text-decoration: none;
 	color: black;
-	background: var(--button-background);
-	box-shadow: 0 5px 0 var(--button-shadow);
+	background: var(--main-pink);
+	box-shadow: 0 5px 0 var(--dark-pink);
 	padding: 0.7em 1.7em;
 }
 
-button:hover, input[type=button]:hover {
-	background: var(--button-background);
+button:hover, input[type=button]:hover, .btn.active {
+	background: var(--main-pink);
 	box-shadow: none;
 	position: relative;
 	top: 5px;
@@ -68,6 +70,24 @@ button:hover, input[type=button]:hover {
 
 .send-data-button {
 	padding: 1em 2em;
+	align-self: flex-start;
+	margin-top: auto;
+}
+
+.r-checkboxes-group {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.r-container, .x-container, .y-container {
+	margin-bottom: 2em;
+	margin-top: 2em;
+}
+
+label {
+	display: flex;
+	align-items: center;
 }
 
 .r-checkbox {
@@ -80,4 +100,31 @@ button:hover, input[type=button]:hover {
 
 .r-checkbox:checked {
 	background: #C71585;
+}
+
+/*таблица результатов*/
+.center-wrapper table {
+	display: inline table;
+}
+
+.caption {
+	font-weight: bold;
+	font-size: 1.7em;
+	margin-bottom: 0.5em;
+}
+
+.records {
+	text-align: center;
+	font-size: 1.5em;
+}
+
+.records-table {
+	border: 2px var(--ultra-dark-pink) solid;
+	border-collapse: collapse;
+	margin-top: 2em;
+}
+
+.records-table th, .records-table td {
+	padding: 1em;
+	border: 1px var(--dark-pink) solid;
 }
