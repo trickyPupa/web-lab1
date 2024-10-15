@@ -1,4 +1,4 @@
-const url = "/api/"
+const url = "/fcgi-bin/server.jar"
 
 function createError(message) {
     document.querySelectorAll(".error").forEach(el => el.remove());
@@ -24,7 +24,6 @@ function submitForm(event) {
     const x = document.getElementById("x");
     const y = document.querySelector('.btn.active');
     const r = document.querySelector('.r-checkbox:checked');
-    alert(r);
     if (!x || !y || !r) {
         createError("x не определен");
     } else {
@@ -41,19 +40,7 @@ function submitForm(event) {
 }
 
 function sendData(x, y, r) {
-    fetch(url, {
-        "method": 'POST',
-        "header": {
-            'Content-Type': 'application/json'
-        },
-        "body": JSON.stringify(
-            {
-                x: parseFloat(x.value),
-                y: parseInt(y.value),
-                r: parseInt(r.value)
-            }
-        )
-    }).then(response => {
+    fetch(url + `?x=${x.value}&y=${y.value}&r=${r.value}`).then(response => {
         response.json()
             .then(data => {
                 addToTable(x.value, y.value, r.value, data.status, data.time, new Date().toLocaleTimeString());
@@ -126,4 +113,4 @@ function checkOnly(checkbox, cls) {
     });
 }
 
-addToTable(1, 1, 1, true, 12, 'now');
+// addToTable(1, 1, 1, true, 12, 'now');

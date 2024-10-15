@@ -2,34 +2,34 @@ import com.fastcgi.FCGIInterface;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ResponseManager {
     Logger logger = Logger.getLogger(this.getClass().getName());
 
-    private final RequestManager requestManager;
     private final long startTime;
-    private long time;
 
-    public ResponseManager(RequestManager requestManager, long time) {
-        this.requestManager = requestManager;
+    public ResponseManager(long time) {
         startTime = time;
-        this.time = time;
     }
 
     public void run() throws IOException {
         var fcgiInterface = new FCGIInterface();
         logger.info("Waiting for requests...");
         while (fcgiInterface.FCGIaccept() >= 0) {
-            var data = requestManager.handleRequest();
-            var values = JSONParser.parse(data);
+            var request = getRequest();
+            logger.info("Received request: " + request);
+
+            var values = parseData(request);
             if (values == null) {
-                logger.log(Level.SEVERE, "Wrong JSON format");
+                logger.log(Level.SEVERE, "Error parsing data");
                 break;
             }
-            logger.info("Request received! %s, %s, %s".formatted(values[0], values[1], values[2]));
-            time = System.currentTimeMillis();
+            logger.info("Received data: %s, %s, %s".formatted(values.get("x"), values.get("y"), values.get("r")));
 
             var response = sendResponse(values);
 
@@ -37,19 +37,17 @@ public class ResponseManager {
         }
     }
 
-    private String sendResponse(double[] values) {
+    protected String sendResponse(Map<String, Double> values) {
         var status = ValidationManager.checkData(values);
+        var time = String.format(Locale.ENGLISH,"%.4f",(double) (System.currentTimeMillis() - startTime) / 1000000);
         var content = """
                     {
                     "status": %s,
                     "time": %s
                     }
                     """;
-        logger.info("Status: %s, time: %s".formatted(status, (double) (System.currentTimeMillis() - startTime)/1000000));
-        content = content.formatted(status, String.format( "%.4f",
-                (double) (System.currentTimeMillis() - startTime)/1000000));
-        /*content = content.formatted(status, String.format( "%.4f",
-                (double) (System.currentTimeMillis() - time)/1000000));*/
+        logger.info("Status: %s, time: %s".formatted(status, time));
+        content = content.formatted(status, time);
 
         var httpResponse = """
                         HTTP/1.1 200 OK
@@ -62,5 +60,22 @@ public class ResponseManager {
         logger.warning("status: %s".formatted(status));
 
         return httpResponse;
+    }
+
+    protected String getRequest() throws IOException {
+        FCGIInterface.request.inStream.fill();
+
+        return FCGIInterface.request.params.getProperty("QUERY_STRING");
+    }
+
+    protected Map<String, Double> parseData(String params) throws IOException {
+        var arr = params.split("&");
+
+        HashMap<String, Double> data = new HashMap<>();
+        data.put("x", Double.valueOf(arr[0].substring(2)));
+        data.put("y", Double.valueOf(arr[1].substring(2)));
+        data.put("r", Double.valueOf(arr[2].substring(2)));
+
+        return data;
     }
 }

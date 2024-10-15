@@ -1,10 +1,10 @@
 import java.io.IOException;
+import java.util.Locale;
 
 public class Main{
     public static void main(String[] args) throws IOException {
         long startTime = System.currentTimeMillis();
-        RequestManager requestManager = new RequestManager();
-        ResponseManager responseManager = new ResponseManager(requestManager, startTime);
+        ResponseManager responseManager = new ResponseManager(startTime);
 
         responseManager.run();
     }

@@ -1,4 +1,10 @@
+import java.util.Map;
+
 public class ValidationManager {
+
+    public static boolean checkData(Map<String, Double> data) {
+        return checkAxis(data.get("x"), data.get("y"), data.get("r"));
+    }
 
     public static boolean checkData(double[] data) {
         return checkAxis(data[0], data[1], data[2]);
