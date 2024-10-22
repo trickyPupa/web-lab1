@@ -11,6 +11,7 @@
 	--dark-pink: #C71585;
 	--ultra-dark-pink: #810754;
 	--deep-pink: #FF1493;
+	--error: red;
 
 	--checked: var(--main-pink);
 }
@@ -127,4 +128,12 @@ label {
 .records-table th, .records-table td {
 	padding: 1em;
 	border: 1px var(--dark-pink) solid;
+}
+
+#text-error {
+	color: var(--error);
+	font-size: 1.7em;
+	height: 0.5em;
+	margin-top: -1.5em;
+	margin-bottom: 2em;
 }

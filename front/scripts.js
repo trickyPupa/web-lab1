@@ -1,18 +1,14 @@
 const url = "/fcgi-bin/server.jar"
 
 function createError(message) {
-    document.querySelectorAll(".error").forEach(el => el.remove());
-    const error = document.createElement("p");
-    error.className = "error";
+    const error = document.getElementById("text-error");
     error.textContent = message;
-    document.getElementById("coordInputs").prepend(error);
 }
 
 const checkX = (value) => {
     return new Promise((resolve, reject) => {
-        if ((-3) > value.value || value.value > 5) {
-            value.classList.add("wrong");
-            reject("x вне допустимых значений");
+        if (isNaN(value) || (-3) > value || value > 5) {
+            reject("значение x некорректно");
         } else {
             resolve();
         }
@@ -24,15 +20,19 @@ function submitForm(event) {
     const x = document.getElementById("x");
     const y = document.querySelector('.btn.active');
     const r = document.querySelector('.r-checkbox:checked');
-    if (!x || !y || !r) {
-        createError("x не определен");
-    } else {
-        y.classList.remove("wrong");
-        r.classList.remove("wrong");
+    createError("");
+
+    if (!y) {
+        createError("y не определен");
+    }
+    else if (!r) {
+        createError("r не определен")
+    }
+    else {
         Promise.all([
-            checkX(x)
-        ]).then(() =>{
-            sendData(x, y, r);
+            checkX(x.value)
+        ]).then(() => {
+            sendData(x.value, y.value, r.value);
         }).catch((error) => {
             createError(error);
         });
@@ -40,14 +40,12 @@ function submitForm(event) {
 }
 
 function sendData(x, y, r) {
-    fetch(url + `?x=${x.value}&y=${y.value}&r=${r.value}`).then(response => {
+    fetch(url + `?x=${x}&y=${y}&r=${r}`).then(response => {
         response.json()
             .then(data => {
-                addToTable(x.value, y.value, r.value, data.status, data.time, new Date().toLocaleTimeString());
+                addToTable(x, y, r, data.status, data.time, new Date().toLocaleTimeString());
                 console.log("row added");
-                drawDot(x.value, y.value, r.value, data.status);
-                y.classList.remove("wrong");
-                r.classList.remove("wrong");
+                drawDot(x, y, r, data.status);
             });
     });
 }
