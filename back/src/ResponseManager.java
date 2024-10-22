@@ -2,6 +2,7 @@ import com.fastcgi.FCGIInterface;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -17,23 +18,27 @@ public class ResponseManager {
         startTime = time;
     }
 
-    public void run() throws IOException {
+    public void run() {
         var fcgiInterface = new FCGIInterface();
         logger.info("Waiting for requests...");
         while (fcgiInterface.FCGIaccept() >= 0) {
-            var request = getRequest();
-            logger.info("Received request: " + request);
+            try {
+                var request = getRequest();
+                logger.info("Received request: " + request);
 
-            var values = parseData(request);
-            if (values == null) {
-                logger.log(Level.SEVERE, "Error parsing data");
-                break;
+                var values = parseData(request);
+                if (values == null) {
+                    logger.log(Level.SEVERE, "Error parsing data");
+                    break;
+                }
+                logger.info("Received data: %s, %s, %s".formatted(values.get("x"), values.get("y"), values.get("r")));
+
+                var response = sendResponse(values);
+
+                System.out.println(response);
+            } catch (Exception e) {
+                logger.warning(Arrays.toString(e.getStackTrace()) + "\n" + e.getMessage());
             }
-            logger.info("Received data: %s, %s, %s".formatted(values.get("x"), values.get("y"), values.get("r")));
-
-            var response = sendResponse(values);
-
-            System.out.println(response);
         }
     }
 
@@ -56,8 +61,6 @@ public class ResponseManager {
                         
                         %s
                         """.formatted(content.getBytes(StandardCharsets.UTF_8).length, content);
-
-        logger.warning("status: %s".formatted(status));
 
         return httpResponse;
     }
