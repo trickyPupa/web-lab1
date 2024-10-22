@@ -49,7 +49,7 @@ input[type=text] {
 }
 
 #x, #r-checkboxes-group, #y-buttons-group {
-	margin-top: 1em;
+	margin-top: 3%;
 }
 
 button, input[type=button] {
@@ -82,8 +82,8 @@ button:hover, input[type=button]:hover, .btn.active {
 }
 
 .r-container, .x-container, .y-container {
-	margin-bottom: 2em;
-	margin-top: 2em;
+	margin-bottom: 6%;
+	margin-top: 6%;
 }
 
 label {
@@ -134,6 +134,6 @@ label {
 	color: var(--error);
 	font-size: 1.7em;
 	height: 0.5em;
-	margin-top: -1.5em;
+	margin-top: -1.2em;
 	margin-bottom: 2em;
 }
