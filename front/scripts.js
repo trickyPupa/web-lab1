@@ -43,9 +43,14 @@ function sendData(x, y, r) {
     fetch(url + `?x=${x}&y=${y}&r=${r}`).then(response => {
         response.json()
             .then(data => {
-                addToTable(x, y, r, data.status, data.time, new Date().toLocaleTimeString());
-                console.log("row added");
-                drawDot(x, y, r, data.status);
+                if (data.message){
+                    createError(data.message);
+                }
+                else {
+                    addToTable(x, y, r, data.status, data.time, new Date().toLocaleTimeString());
+                    console.log("row added");
+                    drawDot(x, y, r, data.status);
+                }
             });
     });
 }
